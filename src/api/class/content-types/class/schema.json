@@ -4,16 +4,25 @@
   "info": {
     "singularName": "class",
     "pluralName": "classes",
-    "displayName": "Class"
+    "displayName": "Class",
+    "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "name": {
-      "type": "string",
-      "required": true
+    "students": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::student.student",
+      "mappedBy": "class"
+    },
+    "teachers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::teacher.teacher",
+      "mappedBy": "class"
     }
   }
 }
