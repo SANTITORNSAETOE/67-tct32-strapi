@@ -15,12 +15,6 @@
     "name": {
       "type": "string",
       "required": true
-    },
-    "class": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::class.class",
-      "inversedBy": "students"
     }
   }
 }

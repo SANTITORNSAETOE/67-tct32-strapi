@@ -793,16 +793,6 @@ export interface ApiClassClass extends Schema.CollectionType {
     draftAndPublish: false;
   };
   attributes: {
-    students: Attribute.Relation<
-      'api::class.class',
-      'oneToMany',
-      'api::student.student'
-    >;
-    teachers: Attribute.Relation<
-      'api::class.class',
-      'oneToMany',
-      'api::teacher.teacher'
-    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -855,11 +845,6 @@ export interface ApiStudentStudent extends Schema.CollectionType {
   };
   attributes: {
     name: Attribute.String & Attribute.Required;
-    class: Attribute.Relation<
-      'api::student.student',
-      'manyToOne',
-      'api::class.class'
-    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -920,11 +905,6 @@ export interface ApiTeacherTeacher extends Schema.CollectionType {
   };
   attributes: {
     name: Attribute.String & Attribute.Required;
-    class: Attribute.Relation<
-      'api::teacher.teacher',
-      'manyToOne',
-      'api::class.class'
-    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
