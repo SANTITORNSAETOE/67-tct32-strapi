@@ -787,14 +787,15 @@ export interface ApiClassClass extends Schema.CollectionType {
     singularName: 'class';
     pluralName: 'classes';
     displayName: 'Class';
-    description: '';
   };
   options: {
-    draftAndPublish: false;
+    draftAndPublish: true;
   };
   attributes: {
+    name: Attribute.String & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::class.class',
       'oneToOne',
