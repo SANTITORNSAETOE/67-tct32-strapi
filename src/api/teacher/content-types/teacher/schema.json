@@ -14,6 +14,12 @@
     "name": {
       "type": "string",
       "required": true
+    },
+    "subject": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::subject.subject",
+      "inversedBy": "student"
     }
   }
 }

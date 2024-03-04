@@ -15,6 +15,12 @@
     "name": {
       "type": "string",
       "required": true
+    },
+    "mobile": {
+      "type": "string"
+    },
+    "class_room": {
+      "type": "string"
     }
   }
 }
