@@ -786,24 +786,29 @@ export interface ApiClassClass extends Schema.CollectionType {
   info: {
     singularName: 'class';
     pluralName: 'classes';
-    displayName: 'Class';
+    displayName: 'Classroom';
     description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    classes: Attribute.Relation<
+    students: Attribute.Relation<
       'api::class.class',
       'manyToMany',
-      'api::class.class'
-    >;
-    Student: Attribute.Relation<
-      'api::class.class',
-      'manyToMany',
-      'api::class.class'
+      'api::student.student'
     >;
     name: Attribute.String;
+    teachers: Attribute.Relation<
+      'api::class.class',
+      'manyToMany',
+      'api::teacher.teacher'
+    >;
+    subjects: Attribute.Relation<
+      'api::class.class',
+      'manyToMany',
+      'api::subject.subject'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -834,6 +839,11 @@ export interface ApiRoomRoom extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
+    subjects: Attribute.Relation<
+      'api::room.room',
+      'oneToMany',
+      'api::subject.subject'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -857,8 +867,19 @@ export interface ApiStudentStudent extends Schema.CollectionType {
   };
   attributes: {
     name: Attribute.String & Attribute.Required;
-    mobile: Attribute.String;
+    mobile: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 10;
+        maxLength: 10;
+      }>;
     class_room: Attribute.String;
+    classrooms: Attribute.Relation<
+      'api::student.student',
+      'manyToMany',
+      'api::class.class'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -889,11 +910,22 @@ export interface ApiSubjectSubject extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    student: Attribute.Relation<
+    Room: Attribute.Relation<
+      'api::subject.subject',
+      'manyToOne',
+      'api::room.room'
+    >;
+    teachers: Attribute.Relation<
       'api::subject.subject',
       'oneToMany',
       'api::teacher.teacher'
     >;
+    classrooms: Attribute.Relation<
+      'api::subject.subject',
+      'manyToMany',
+      'api::class.class'
+    >;
+    name: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -918,6 +950,7 @@ export interface ApiTeacherTeacher extends Schema.CollectionType {
     singularName: 'teacher';
     pluralName: 'teachers';
     displayName: 'Teacher';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -928,6 +961,11 @@ export interface ApiTeacherTeacher extends Schema.CollectionType {
       'api::teacher.teacher',
       'manyToOne',
       'api::subject.subject'
+    >;
+    classrooms: Attribute.Relation<
+      'api::teacher.teacher',
+      'manyToMany',
+      'api::class.class'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;

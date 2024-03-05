@@ -4,7 +4,7 @@
   "info": {
     "singularName": "class",
     "pluralName": "classes",
-    "displayName": "Class",
+    "displayName": "Classroom",
     "description": ""
   },
   "options": {
@@ -12,20 +12,26 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "classes": {
+    "students": {
       "type": "relation",
       "relation": "manyToMany",
-      "target": "api::class.class",
-      "inversedBy": "Student"
-    },
-    "Student": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::class.class",
-      "inversedBy": "classes"
+      "target": "api::student.student",
+      "inversedBy": "classrooms"
     },
     "name": {
       "type": "string"
+    },
+    "teachers": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::teacher.teacher",
+      "inversedBy": "classrooms"
+    },
+    "subjects": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::subject.subject",
+      "inversedBy": "classrooms"
     }
   }
 }

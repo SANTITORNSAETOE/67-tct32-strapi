@@ -12,11 +12,26 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "student": {
+    "Room": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::room.room",
+      "inversedBy": "subjects"
+    },
+    "teachers": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::teacher.teacher",
       "mappedBy": "subject"
+    },
+    "classrooms": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::class.class",
+      "mappedBy": "subjects"
+    },
+    "name": {
+      "type": "string"
     }
   }
 }
